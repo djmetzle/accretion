@@ -15,7 +15,6 @@ module Sinatra
 				end
 
 				app.post '/warehouse/:collection' do
-					p request.body.read
 					request.body.rewind
 					begin
 						payload = JSON.parse request.body.read
