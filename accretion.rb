@@ -1,9 +1,13 @@
 require 'sinatra'
 
-get '/warehouse/health' do
-	"HEALTHY"
-end
+require_relative './lib/post_controller.rb'
 
-post '/warehouse/:collection' do
-	# handle_post(params)
+class Accretion < Sinatra::Base
+	set :root, File.dirname(__FILE__)
+
+	get '/warehouse/health' do
+		"HEALTHY"
+	end
+
+	register Sinatra::Accretion::PostController
 end
