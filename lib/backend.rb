@@ -1,16 +1,20 @@
 # Accreation Backend Singleton
 
+require_relative './config'
+require_relative './connection'
+
 class Backend
+	# Backend Configuration (static)
 	@@config = nil
+	# DB Connection (static)
 	@@connection = nil
 
 	def self.save(collection, payload)
-		puts "Save All the Things"
 		unless @@config
-			# Fetch Configuration
+			@@config = BackendConfig.new
 		end
 		unless @@connection
-			# Standup Connection
+			@@connection = BackendConnection.new(@@config)
 		end
 	end
 
