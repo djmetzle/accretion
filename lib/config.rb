@@ -13,15 +13,23 @@ class BackendConfig
 
 	def initialize
 		fetch_env_vars
-		fetch_credentials
 	end
 
 	private
 	def fetch_env_vars
 		puts "Fetch Environment"
+		spec = ENV['CREDENTIALS_SPEC'] || nil
+		unless spec
+			# default to local
+			@db_host = 'mongodb://mongo_local'
+			return
+		end
+		# otherwise fetch
+		fetch_credentials(spec)
 	end
 
-	def fetch_credentials
+	def fetch_credentials(spec)
 		puts "Pull credentials"
+		p spec
 	end
 end
