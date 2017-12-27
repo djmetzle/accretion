@@ -1,0 +1,11 @@
+version: '3'
+services:
+    accretion:
+        build: .
+        ports:
+         - "9292:9292"
+        links:
+         - mongo_local
+        entrypoint: "/opt/accretion/launch.sh"
+    mongo_local:
+        image: "mongo"
