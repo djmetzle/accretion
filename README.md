@@ -1,4 +1,4 @@
-# Accreation
+# Accretion
 
 A simple data warehousing ingestion API.
 
@@ -11,15 +11,18 @@ Example:
 ```
 POST http://<server_address>/warehouse/<collection_name>
 
-(adds POST request body as a document to Collection <collection_name>)
 ```
+
+This adds the POST request body to Collection <collection_name>).
+
+Note: payloads should be JSON encoded.
+
+## Validation
+
+Collection names should be lowercase alphabet characters only.
+Underscores can be used. All other formats will be forced 
+to lowercase alpha + `_`.
 
 ## Docker Compose
 
 Please find included a `docker-compose.yml` file for local testing.
-
-If the defaul local backend DB connection will not be used, pass a parameter:
-```
-CREDENTIALS_SPEC=<file_name>
-```
-to define and configure credentials for the backend connection.
