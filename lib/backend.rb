@@ -18,6 +18,9 @@ class Backend
 		end
 		client = @@connection.get_client
 
+		# set a timestamp for this payload
+		payload[:timestamp] = Time.now.to_i
+
 		client[collection].insert_one(payload.to_h)
 	end
 
