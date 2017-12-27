@@ -21,7 +21,7 @@ class BackendConfig
 		spec = ENV['CREDENTIALS_SPEC'] || nil
 		unless spec
 			# default to local
-			@db_host = 'mongodb://mongo_local'
+			@db_host = 'mongo_local'
 			return
 		end
 		# otherwise fetch
