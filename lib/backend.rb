@@ -17,8 +17,8 @@ class Backend
 			@@connection = BackendConnection.new(@@config)
 		end
 		client = @@connection.get_client
-		# w00t
-		puts "w00t"
+
+		client[collection].insert_one(payload.to_h)
 	end
 
 	private

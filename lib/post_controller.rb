@@ -10,7 +10,7 @@ module Sinatra
 			def self.registered(app)
 				def app.handle_post(collection,payload)
 					# save payload to collection
-					Backend.save(payload,collection)
+					Backend.save(collection,payload)
 					return
 				end
 
