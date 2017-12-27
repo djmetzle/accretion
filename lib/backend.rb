@@ -16,6 +16,9 @@ class Backend
 		unless @@connection
 			@@connection = BackendConnection.new(@@config)
 		end
+		client = @@connection.get_client
+		# w00t
+		puts "w00t"
 	end
 
 	private
