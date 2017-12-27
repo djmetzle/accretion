@@ -16,10 +16,14 @@ class Backend
 		unless @@connection
 			@@connection = BackendConnection.new(@@config)
 		end
-		client = @@connection.get_client
+
+		# clean collection name to lower alpha only
+		collection = collection.downcase.gsub!(/\W/,'')
 
 		# set a timestamp for this payload
 		payload[:timestamp] = Time.now.to_i
+
+		client = @@connection.get_client
 
 		client[collection].insert_one(payload.to_h)
 	end
