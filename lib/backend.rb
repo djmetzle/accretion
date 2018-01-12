@@ -18,7 +18,7 @@ class Backend
 		end
 
 		# clean collection name to lower alpha only
-		collection = collection.downcase.gsub!(/\W/,'')
+		collection = collection.downcase.gsub(/\W/,'')
 
 		# set a timestamp for this payload
 		payload[:timestamp] = Time.now.to_i
