@@ -21,9 +21,9 @@ class BackendConfig
 	def fetch_env_vars
 		puts "Fetch Environment"
 		region_name = ENV['CREDENTIALS_REGION'] || 'us-east-1'
-		bucket_name = ENV['CREDENTIALS_BUCKET'] || nil
-		key_name = ENV['CREDENTIALS_KEY'] || nil
-		unless spec and key
+		bucket_name = ENV['CREDENTIALS_BUCKET']
+		key_name = ENV['CREDENTIALS_KEY']
+		unless bucket_name and key_name
 			puts "defaulting to local db"
 			@db_host = 'mongo_local'
 			return
@@ -34,7 +34,7 @@ class BackendConfig
 
 	def fetch_credentials(region, bucket, key)
 		puts "Pull credentials"
-		s3 = Aws::S3::Resource.new(region)
+		s3 = Aws::S3::Resource.new(region: region)
 		obj = s3.bucket(bucket).object(key)
 		p obj
 	end
