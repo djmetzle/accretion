@@ -1,5 +1,7 @@
 # Accretion Backend Configuration
 
+require 'aws-sdk-s3'
+
 class BackendConfig
 	attr_reader :db_host
 	attr_reader :db_is_replica_set
@@ -18,18 +20,22 @@ class BackendConfig
 	private
 	def fetch_env_vars
 		puts "Fetch Environment"
-		spec = ENV['CREDENTIALS_SPEC'] || nil
-		unless spec
-			# default to local
+		region_name = ENV['CREDENTIALS_REGION'] || 'us-east-1'
+		bucket_name = ENV['CREDENTIALS_BUCKET'] || nil
+		key_name = ENV['CREDENTIALS_KEY'] || nil
+		unless spec and key
+			puts "defaulting to local db"
 			@db_host = 'mongo_local'
 			return
 		end
-		# otherwise fetch
-		fetch_credentials(spec)
+		puts "fetching credentials from S3"
+		fetch_credentials(region_name, bucket_name, key_name)
 	end
 
-	def fetch_credentials(spec)
+	def fetch_credentials(region, bucket, key)
 		puts "Pull credentials"
-		p spec
+		s3 = Aws::S3::Resource.new(region)
+		obj = s3.bucket(bucket).object(key)
+		p obj
 	end
 end
