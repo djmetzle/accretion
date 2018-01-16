@@ -10,9 +10,13 @@ class BackendConnection
 	end
 
 	def connect
+		p @config
 		@client = Mongo::Client.new(
 				[@config.db_host],
-				:database => 'warehouse')
+				:database => 'warehouse',
+				:user => @config.credentials[:username],
+				:password => @config.credentials[:password],
+		)
 	end
 
 	def get_client
