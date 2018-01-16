@@ -37,24 +37,24 @@ class BackendConfig
 		s3 = Aws::S3::Resource.new(region: region)
 		obj = s3.bucket(bucket).object(key)
 		credentials_content = obj.get.body.read
-      unpack_credentials(credentials_content)
+		unpack_credentials(credentials_content)
 	end
 
-   def unpack_credentials(credentials)
-      db_credentials = JSON.parse(credentials)
-      
-      p db_credentials
+	def unpack_credentials(credentials)
+		db_credentials = JSON.parse(credentials)
+		
+		p db_credentials
 
-      @db_host = db_credentials["db_host"]
+		@db_host = db_credentials["db_host"]
 
-      @credentials = {}
+		@credentials = {}
 
-      @credentials[:username] = db_credentials["username"]
-      @credentials[:password] = db_credentials["password"]
+		@credentials[:username] = db_credentials["username"]
+		@credentials[:password] = db_credentials["password"]
 
-      @db_is_replica_set = db_credentials["db_is_replica_set"]
-      if @db_is_replica_set
-         @credentials[:replica_set] = db_credentials["replica_set"]
-      end
-   end
+		@db_is_replica_set = db_credentials["db_is_replica_set"]
+		if @db_is_replica_set
+			@credentials[:replica_set] = db_credentials["replica_set"]
+		end
+	end
 end
