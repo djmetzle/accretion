@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'json'
 gem 'sinatra'
 gem 'mongo'
 gem 'aws-sdk', '~> 3'
