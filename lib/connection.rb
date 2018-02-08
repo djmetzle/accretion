@@ -11,12 +11,22 @@ class BackendConnection
 
 	def connect
 		p @config
-		@client = Mongo::Client.new(
-				[@config.db_host],
-				:database => 'warehouse',
-				:user => @config.credentials[:username],
-				:password => @config.credentials[:password],
-		)
+		if @config.db_is_replica_set
+			@client = Mongo::Client.new(
+					[@config.db_host],
+					:database => 'warehouse',
+					:user => @config.credentials[:username],
+					:password => @config.credentials[:password],
+					:replica_set => @config.credentials[:replica_set],
+			)
+		else
+			@client = Mongo::Client.new(
+					[@config.db_host],
+					:database => 'warehouse',
+					:user => @config.credentials[:username],
+					:password => @config.credentials[:password],
+			)
+		end
 	end
 
 	def get_client
