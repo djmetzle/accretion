@@ -13,7 +13,7 @@ class BackendConnection
 		p @config
 		if @config.db_is_replica_set
 			@client = Mongo::Client.new(
-					[@config.db_host],
+					@config.db_host,
 					:database => 'warehouse',
 					:user => @config.credentials[:username],
 					:password => @config.credentials[:password],
